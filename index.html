@@ -447,7 +447,7 @@ footer p{font-size:.62rem;letter-spacing:.13em;color:var(--faint);line-height:2.
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-const aud=new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3');
+const aud=new Audio('music.mp3');
 aud.loop=true;aud.volume=.28;
 let mOn=false;
 function tryPlay(){aud.play().then(()=>{mOn=true;document.getElementById('mbtn').classList.add('on');setMic();}).catch(()=>{});}
