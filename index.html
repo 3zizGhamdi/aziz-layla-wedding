@@ -415,7 +415,7 @@ footer p{font-family:'Noto Naskh Arabic',serif;font-size:.75rem;letter-spacing:.
 gsap.registerPlugin(ScrollTrigger);
 
 /* AUDIO */
-const aud=new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3');
+const aud=new Audio('music.mp3');
 aud.loop=true;aud.volume=.28;let mOn=false;
 function tryPlay(){aud.play().then(()=>{mOn=true;document.getElementById('mbtn').classList.add('on');setMic();}).catch(()=>{});}
 ['click','touchstart'].forEach(e=>document.addEventListener(e,function h(){tryPlay();document.removeEventListener(e,h);},{once:true}));
