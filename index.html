@@ -1,5 +1,4 @@
-
-html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -154,24 +153,61 @@ ul{list-style:none}
 .map-link svg{width:14px;height:14px;stroke:var(--gold2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
 /* ══════════════════════════════
-   TIMELINE — تفاعلي مع السكرول للأعلى والأسفل
+   TIMELINE — Mobile First
 ══════════════════════════════ */
-.tl{position:relative;margin-top:2.2rem;display:flex;flex-direction:column;gap:0}
-.tl-line{position:absolute;right:50%;top:0;bottom:0;width:1px;background:linear-gradient(rgba(212,168,67,.45),rgba(212,168,67,.04));transform:translateX(50%)}
+.tl{
+  position:relative;margin-top:2rem;
+  display:flex;flex-direction:column;gap:.6rem;
+  padding-right:clamp(3rem,9vw,4rem);
+}
+.tl-line{
+  position:absolute;right:clamp(1rem,2.8vw,1.4rem);
+  top:0;bottom:0;width:1px;
+  background:linear-gradient(rgba(212,168,67,.5),rgba(212,168,67,.04));
+}
 .tl-item{
-  display:grid;grid-template-columns:1fr 48px 1fr;align-items:center;
-  gap:.6rem;padding:1rem 0;
-  /* تبدأ مخفية — تُظهر بالـ JS */
+  display:flex;flex-direction:row;align-items:flex-start;
+  gap:.8rem;padding:.5rem 0;
   opacity:0;transform:translateY(25px);
   will-change:transform,opacity;
+  position:relative;
 }
-.tl-l{text-align:right;padding-right:.5rem}
-.tl-r{text-align:left;padding-left:.5rem}
-.tl-node{width:44px;height:44px;border-radius:50%;background:rgba(212,168,67,.1);backdrop-filter:blur(10px);border:1px solid rgba(212,168,67,.38);display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 0 0 6px rgba(5,3,1,.6);position:relative;z-index:1;flex-shrink:0;margin:0 auto;transition:transform .35s var(--spring),box-shadow .35s}
-.tl-item:hover .tl-node{transform:scale(1.18);box-shadow:0 0 0 8px rgba(5,3,1,.6),0 5px 22px rgba(212,168,67,.32)}
-.tl-yr{font-family:'Tajawal',sans-serif;font-size:.7rem;font-weight:500;color:var(--gold2);margin-bottom:.16rem}
-.tl-title{font-family:'Markazi Text',serif;font-weight:600;font-size:clamp(.92rem,2.6vw,1.1rem);color:#fdf5e6;margin-bottom:.18rem}
-.tl-txt{font-family:'Tajawal',sans-serif;font-size:clamp(.73rem,1.9vw,.85rem);font-weight:400;color:var(--muted);line-height:1.85}
+.tl-node{
+  position:absolute;
+  right:clamp(-2.4rem,-7vw,-2rem);
+  top:.85rem;
+  width:clamp(36px,8vw,44px);height:clamp(36px,8vw,44px);
+  border-radius:50%;
+  background:rgba(212,168,67,.12);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(212,168,67,.42);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(.82rem,2.2vw,1rem);
+  box-shadow:0 0 0 5px rgba(5,3,1,.68);
+  z-index:1;
+  transition:transform .35s var(--spring),box-shadow .35s;
+}
+.tl-item:hover .tl-node,.tl-item:active .tl-node{
+  transform:scale(1.16);
+  box-shadow:0 0 0 7px rgba(5,3,1,.65),0 4px 18px rgba(212,168,67,.3);
+}
+.tl-content{
+  flex:1;text-align:right;
+  background:rgba(255,252,245,.065);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(212,168,67,.14);
+  border-radius:14px;
+  padding:clamp(.85rem,3vw,1.25rem) clamp(.85rem,3vw,1.25rem);
+  transition:border-color .35s,box-shadow .35s;
+}
+.tl-item:hover .tl-content,.tl-item:active .tl-content{
+  border-color:rgba(212,168,67,.28);
+  box-shadow:0 6px 26px rgba(0,0,0,.28);
+}
+.tl-yr{font-family:'Tajawal',sans-serif;font-size:.72rem;font-weight:500;color:var(--gold2);margin-bottom:.2rem}
+.tl-title{font-family:'Markazi Text',serif;font-weight:600;font-size:clamp(1rem,2.8vw,1.18rem);color:#fdf5e6;margin-bottom:.28rem}
+.tl-txt{font-family:'Tajawal',sans-serif;font-size:clamp(.78rem,2.1vw,.88rem);font-weight:400;color:var(--muted);line-height:1.9}
 
 /* COUNTDOWN */
 .cd-grid{display:flex;justify-content:center;align-items:flex-start;gap:clamp(.25rem,2vw,1.8rem);flex-wrap:nowrap;margin:clamp(1.8rem,5vw,3rem) 0}
@@ -224,16 +260,7 @@ footer p{font-family:'Tajawal',sans-serif;font-size:.78rem;font-weight:400;color
 ══════════════════════════════ */
 @media(max-width:520px){
   .hr1,.hr2{display:none}
-  /* Timeline على الجوال: عمود واحد من اليمين */
-  .tl-line{right:18px;transform:none}
-  .tl-item{grid-template-columns:1fr 42px;align-items:start;gap:.5rem}
-  .tl-l{text-align:right;padding-right:.4rem}
-  .tl-r{display:none}
-  .tl-node{grid-column:2;grid-row:1;width:38px;height:38px;font-size:.86rem;margin:0;box-shadow:0 0 0 5px rgba(5,3,1,.6)}
-  /* الفقرات اليسرى تُعرض في العمود الأيمن على الجوال */
-  .tl-item.lc .tl-r{display:block;grid-column:1;grid-row:1;text-align:right;padding:0 .4rem 0 0}
-  .tl-item.lc .tl-l{display:none}
-  .tl-item.lc .tl-node{grid-column:2;grid-row:1}
+
   .cd-grid{gap:.18rem}
   .ev-meta{flex-direction:column;align-items:center;gap:.32rem}
 }
@@ -623,35 +650,26 @@ function initScrollAnims(){
     },{passive:true});
   });
 
-  /* ════ FIX #2 — Timeline تفاعلي مع السكرول أعلى وأسفل ════ */
+  /* ════ Timeline — تفاعلي مع السكرول أعلى وأسفل ════ */
   gsap.utils.toArray('.tl-item').forEach((el,i)=>{
-    const isLeft = el.classList.contains('lc');
-    const mob = window.innerWidth <= 520;
-    const xFrom = mob ? 0 : (isLeft ? -50 : 50);
-
-    /* ظهور أول مرة */
     gsap.fromTo(el,
-      {opacity:0, x:xFrom, y:24},
-      {opacity:1, x:0, y:0, duration:.9, ease:'power3.out', delay:i*.1,
-       scrollTrigger:{trigger:el, start:'top 90%', once:true}}
+      {opacity:0, y:42, scale:.96},
+      {opacity:1, y:0, scale:1, duration:.9, ease:'power3.out', delay:i*.12,
+       scrollTrigger:{trigger:el, start:'top 92%', once:true}}
     );
-
-    /* Scrub دخول */
     gsap.fromTo(el,
-      {opacity:.1, y:35, x:xFrom*.5},
-      {opacity:1, y:0, x:0, ease:'none',
-       scrollTrigger:{trigger:el, start:'top 93%', end:'top 45%', scrub:1.2}}
+      {opacity:.05, y:52},
+      {opacity:1, y:0, ease:'none',
+       scrollTrigger:{trigger:el, start:'top 95%', end:'top 42%', scrub:1.3}}
     );
-
-    /* Scrub خروج — يختفي تدريجياً عند السكرول للأعلى */
     gsap.fromTo(el,
       {opacity:1, y:0},
-      {opacity:0, y:-30, ease:'none',
-       scrollTrigger:{trigger:el, start:'bottom 62%', end:'bottom 8%', scrub:1.2}}
+      {opacity:0, y:-32, ease:'none',
+       scrollTrigger:{trigger:el, start:'bottom 65%', end:'bottom 6%', scrub:1.3}}
     );
   });
 
-  /* Countdown */
+    /* Countdown */
   gsap.fromTo('.cd-grid',{opacity:0,scale:.9,y:26},{opacity:1,scale:1,y:0,duration:1,ease:'back.out(1.5)',
     scrollTrigger:{trigger:'.cd-grid',start:'top 89%',once:true}});
 
@@ -707,8 +725,46 @@ function openMap(){openModal('mapModal','mapBox');}
 function closeMap(){closeModal('mapModal','mapBox');}
 </script>
 </body>
-</html>'''
+</html      <div class="tl">
+      <div class="tl-line"></div>
 
-with open('output/index.html','w',encoding='utf-8') as f:
-    f.write(html)
-print("Done:", len(html), "chars")
+      <div class="tl-item" id="tl1">
+        <div class="tl-content">
+          <div class="tl-yr">البداية</div>
+          <div class="tl-title">لقاء كتبه الله</div>
+          <div class="tl-txt">في لحظة لم يخطط لها أحد، جمع القدر بين روحين كانتا تبحثان عن بعضهما دون أن تعلما.</div>
+        </div>
+        <div class="tl-node">🌸</div>
+      </div>
+
+      <div class="tl-item" id="tl2">
+        <div class="tl-content">
+          <div class="tl-yr">المعرفة</div>
+          <div class="tl-title">حين تعرف القلب</div>
+          <div class="tl-txt">كلما تحدثا اكتشفا أن ما بينهما ليس مصادفة، بل خيط من السماء نُسج بعناية.</div>
+        </div>
+        <div class="tl-node">🤝</div>
+      </div>
+
+      <div class="tl-item" id="tl3">
+        <div class="tl-content">
+          <div class="tl-yr">الخطبة</div>
+          <div class="tl-title">كلمة غيّرت كل شيء</div>
+          <div class="tl-txt">بكلمات من القلب وبركة الأهل، بدأت رحلة جديدة نحو غدٍ مليء بالمحبة والعطاء.</div>
+        </div>
+        <div class="tl-node">💍</div>
+      </div>
+
+      <div class="tl-item" id="tl4">
+        <div class="tl-content">
+          <div class="tl-yr">الزواج</div>
+          <div class="tl-title">يبدأ الأبد الآن</div>
+          <div class="tl-txt">في ليلة باركها الله، وبحضور من نحبهم، تبدأ قصة حب لا تنتهي — إلى ما شاء الله.</div>
+        </div>
+        <div class="tl-node">🌹</div>
+      </div>
+
+    </div>
+  </section>
+
+>
